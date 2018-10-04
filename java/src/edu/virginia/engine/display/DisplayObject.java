@@ -1,7 +1,6 @@
 package edu.virginia.engine.display;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,17 +20,32 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
+	/* x,y position where object is drawn */
+	private Point position;
+
+	/* origin that object pivots off */
+	private Point pivotPoint;
+
+	/* degrees of rotation of object */
+	private int rotation;
+
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
 	 */
 	public DisplayObject(String id) {
 		this.setId(id);
+		this.setPosition(new Point(0,0));
+		this.setPivotPoint(new Point(0,0));
+		this.setRotation(0);
 	}
 
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
+		this.setPosition(new Point(0,0));
+		this.setPivotPoint(new Point(0,0));
+		this.setRotation(0);
 	}
 
 	public void setId(String id) {
@@ -41,6 +55,18 @@ public class DisplayObject {
 	public String getId() {
 		return id;
 	}
+
+	public void setPosition(Point pos) { this.position = pos; }
+
+	public Point getPosition() { return position; }
+
+	public void setPivotPoint(Point pp) { this.pivotPoint = pp; }
+
+	public Point getPivotPoint() { return pivotPoint; }
+
+	public void setRotation(int rot) { this.rotation = rot; }
+
+	public int getRotation() { return rotation; }
 
 
 	/**
@@ -136,6 +162,7 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
+		/*
 			g2d.translate(this.position.x, this.position.y);
 			g2d.rotate(Math.toRadians(this.getRotation()));
 			g2d.scale(this.scaleX, this.scaleY);
@@ -144,6 +171,7 @@ public class DisplayObject {
 					g2d.getComposite()).getAlpha();
 			g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
 					this.alpha));
+					*/
 	}
 
 	/**
@@ -151,8 +179,10 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void reverseTransformations(Graphics2D g2d) {
+		/*
 		g2d.setComposite(AlphaComposite.getInstance(3,
 				this.oldAlpha));
+				*/
 	}
 
 }
