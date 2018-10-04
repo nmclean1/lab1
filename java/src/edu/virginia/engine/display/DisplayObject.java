@@ -26,7 +26,7 @@ public class DisplayObject {
 	/* origin that object pivots off */
 	private Point pivotPoint;
 
-	/* degrees of rotation of object */
+	/* radians of rotation of object */
 	private int rotation;
 
 	private Boolean visible;
@@ -197,15 +197,14 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
-
-		/*g2d.translate(this.position.x, this.position.y);
+		g2d.translate(this.position.x, this.position.y);
 		g2d.rotate(Math.toRadians(this.getRotation()));
 		g2d.scale(this.scaleX, this.scaleY);
 		float curAlpha;
 		this.oldAlpha = curAlpha = ((AlphaComposite)
 				g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
-				this.alpha));*/
+				this.alpha));
 	}
 
 	/**
@@ -213,9 +212,14 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void reverseTransformations(Graphics2D g2d) {
-
-		/*g2d.setComposite(AlphaComposite.getInstance(3,
-				this.oldAlpha));*/
+		g2d.setComposite(AlphaComposite.getInstance(3,
+				this.oldAlpha));
+		// scale back by the reciprocal (2x -> 1/2x)
+		g2d.scale(1/(this.scaleX), 1/(this.scaleY));
+		// rotate back around (20 radians -> -20 radians back)
+		g2d.rotate(Math.toRadians((-1)*this.getRotation()));
+		// translate back (+5 to the right, -5 to the left)
+		g2d.translate((-1 * this.position.x),(-1 * this.position.y));
 	}
 
 }
