@@ -87,16 +87,22 @@ public class LabOneGame extends Game{
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_Z)){
-			mario.setAlpha(mario.getAlpha() - 0.1f);
+			if(mario.getAlpha() > 0.05f) {
+				mario.setAlpha(mario.getAlpha() - 0.05f);
+			}
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_X)){
-			mario.setAlpha(mario.getAlpha() + 0.1f);
+			if(mario.getAlpha() < 1.0f) {
+				mario.setAlpha(mario.getAlpha() + 0.05f);
+			}
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_A)){
-			mario.setScaleX(mario.getScaleX() - 0.1);
-			mario.setScaleY(mario.getScaleY() - 0.1);
+			if(mario.getScaleX() > 0.2) {
+				mario.setScaleX(mario.getScaleX() - 0.1);
+				mario.setScaleY(mario.getScaleY() - 0.1);
+			}
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_S)){
