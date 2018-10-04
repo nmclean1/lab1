@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3abe7a09-3fbe-4548-96d1-65c0827809ad" name="Default Changelist" comment="" />
+    <list default="true" id="3abe7a09-3fbe-4548-96d1-65c0827809ad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +43,24 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="973824960">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="3" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -48,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/src/edu/virginia/lab1test/LabOneGame.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1558">
-              <caret line="123" column="48" lean-forward="true" selection-start-line="123" selection-start-column="48" selection-end-line="123" selection-end-column="48" />
+            <state relative-caret-position="497">
+              <caret line="154" column="32" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
               <folding>
                 <element signature="e#668#669#0" expanded="true" />
                 <element signature="e#689#690#0" expanded="true" />
@@ -78,6 +98,9 @@
       <find>id</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -91,11 +114,13 @@
     <option name="width" value="961" />
     <option name="height" value="745" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -141,7 +166,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -196,7 +220,7 @@
     <frame x="405" y="23" width="961" height="745" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30576715" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31229597" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -231,7 +255,7 @@
     <entry file="file://$PROJECT_DIR$/src/edu/virginia/lab1test/LabOneGame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -240,8 +264,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/virginia/engine/display/DisplayObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1558">
-          <caret line="123" column="48" lean-forward="true" selection-start-line="123" selection-start-column="48" selection-end-line="123" selection-end-column="48" />
+        <state relative-caret-position="497">
+          <caret line="154" column="32" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
           <folding>
             <element signature="e#668#669#0" expanded="true" />
             <element signature="e#689#690#0" expanded="true" />
