@@ -197,8 +197,10 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
+		Point pp = this.getPivotPoint();
+
 		g2d.translate(this.position.x, this.position.y);
-		g2d.rotate(Math.toRadians(this.getRotation()));
+		g2d.rotate(Math.toRadians(this.getRotation()),pp.x,pp.y);
 		g2d.scale(this.scaleX, this.scaleY);
 		float curAlpha;
 		this.oldAlpha = curAlpha = ((AlphaComposite)
@@ -212,12 +214,14 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void reverseTransformations(Graphics2D g2d) {
+		Point pp = this.getPivotPoint();
+
 		g2d.setComposite(AlphaComposite.getInstance(3,
 				this.oldAlpha));
 		// scale back by the reciprocal (2x -> 1/2x)
 		g2d.scale(1/(this.scaleX), 1/(this.scaleY));
 		// rotate back around (20 radians -> -20 radians back)
-		g2d.rotate(Math.toRadians((-1)*this.getRotation()));
+		g2d.rotate(Math.toRadians((-1)*this.getRotation()),pp.x,pp.y);
 		// translate back (+5 to the right, -5 to the left)
 		g2d.translate((-1 * this.position.x),(-1 * this.position.y));
 	}
