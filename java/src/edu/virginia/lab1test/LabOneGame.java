@@ -83,7 +83,7 @@ public class LabOneGame extends Game{
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_V)){
-			mario.setVisible(mario.getVisible() ? false : true);
+			mario.setVisible(!mario.getVisible());
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_Z)){
@@ -121,7 +121,7 @@ public class LabOneGame extends Game{
 		super.draw(g);
 		
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-		if(mario != null) mario.draw(g);
+		if(mario != null && mario.getVisible()) mario.draw(g);
 	}
 
 	/**
