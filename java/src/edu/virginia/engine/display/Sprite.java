@@ -3,6 +3,7 @@ package edu.virginia.engine.display;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Timer;
+import java.awt.image.BufferedImage;
 
 /**
  * Nothing in this class (yet) because there is nothing specific to a Sprite yet that a DisplayObject
@@ -26,7 +27,7 @@ public class Sprite extends DisplayObject {
 
 public class AnimatedSprite extends Sprite {
 
-	private ArrayList<animation> animations;
+	private ArrayList<Animation> animations;
 	private boolean playing;
 	private String fileName;
 	private ArrayList<BufferedImage> frames;
@@ -42,6 +43,7 @@ public class AnimatedSprite extends Sprite {
 		this.setFileName(fileName);
 		this.setPosition(position);
 		this.setGameClock();
+		this.setAnimationSpeed(DEFAULT_ANIMATION_SPEED);
 	}
 
 	public void setFileName(String fileName) {
@@ -55,6 +57,10 @@ public class AnimatedSprite extends Sprite {
 
 	public void setGameClock() {
 		this.gameClock = new Timer(DEFAULT_ANIMATION_SPEED, this);
+	}
+
+	public void setAnimationSpeed(int speed) {
+		this.animationSpeed = speed;
 	}
 
 	public void initGameClock() {
