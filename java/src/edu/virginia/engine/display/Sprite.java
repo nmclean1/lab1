@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.awt.image.BufferedImage;
+import edu.virginia.engine.display.Animation;
+import edu.virginia.engine.util.GameClock;
 
 /**
  * Nothing in this class (yet) because there is nothing specific to a Sprite yet that a DisplayObject
@@ -25,7 +27,7 @@ public class Sprite extends DisplayObject {
 	}
 }
 
-public class AnimatedSprite extends Sprite {
+class AnimatedSprite extends Sprite {
 
 	private ArrayList<Animation> animations;
 	private boolean playing;
@@ -36,9 +38,9 @@ public class AnimatedSprite extends Sprite {
 	private int endFrame;
 	private static final int DEFAULT_ANIMATION_SPEED = 1;
 	private int animationSpeed;
-	private Timer gameClock;
+	private GameClock gameClock;
 
-	public AnimatedSprite(String id, String fileName, int position) {
+	public AnimatedSprite(String id, String fileName, Point position) {
 		super(id);
 		this.setFileName(fileName);
 		this.setPosition(position);
@@ -56,11 +58,19 @@ public class AnimatedSprite extends Sprite {
 	}
 
 	public void setGameClock() {
-		this.gameClock = new Timer(DEFAULT_ANIMATION_SPEED, this);
+		this.gameClock = new GameClock();
 	}
 
 	public void setAnimationSpeed(int speed) {
 		this.animationSpeed = speed;
+	}
+
+	public void setCurrentFrame(int frame) {
+		this.currentFrame = frame;
+	}
+
+	public void setAnimations(ArrayList<Animation> anims) {
+		this.animations = anims;
 	}
 
 	public void initGameClock() {
@@ -74,39 +84,57 @@ public class AnimatedSprite extends Sprite {
 		}
 	}
 
-	public Animation getAnimation(String id){
-		for (int i = 0; i < animations.size(); i++){
-			if (animations.get(i).id == id){
+	public Animation getAnimation(String id) {
+		for (int i = 0; i < animations.size(); i++) {
+			if (animations.get(i).getId() == id) {
 				return animations.get(i);
 			}
 		}
 		return null;
 	}
 
-	private void animate(Animation a){
-		this.startFrame = a.startFrame;
-		this.endFrame = a.endFrame;
+	private void animate(Animation a) {
+		this.startFrame = a.getStartFrame();
+		this.endFrame = a.getEndFrame();
 	}
 
-	private void animate(String id){
+	private void animate(String id) {
 		Animation a = getAnimation(id);
-		this.startFrame = a.startFrame;
-		this.endFrame = a.endFrame;
+		this.startFrame = a.getStartFrame();
+		this.endFrame = a.getEndFrame();
 	}
 
-	private void animate(int startFrame, int endFrame){
+	private void animate(int startFrame, int endFrame) {
 		this.startFrame = startFrame;
 		this.endFrame = endFrame;
 	}
 
-	private void stopAnimation(int frameNumber){
-		if(this.playing) {
+	private void stopAnimation(int frameNumber) {
+		if (this.playing) {
 			this.setCurrentFrame(frameNumber);
 			this.playing = false;
 		}
 	}
 
-	private void stopAnimation(){
+	private void stopAnimation() {
 		stopAnimation(this.startFrame);
 	}
+
+	@Override
+	public void draw(Graphics g) {
+		// If it's playing and the right amount of time has passed, iterate through the arrayList
+		if (!(this.playing && (this.gameClock.getElapsedTime() >= this.animationSpeed)))
+			return;
+		else if (this.currentFrame == this.endFrame)
+			this.setCurrentFrame(this.startFrame);
+		else
+			this.setCurrentFrame(this.currentFrame++);
+
+		// Reset the gameClock only on image change
+		this.gameClock.resetGameClock();
+
+		// Find the current frame's animation's ID, then get the proper image from that
+		super.draw(g);
+	}
+
 }
