@@ -67,4 +67,46 @@ public class AnimatedSprite extends Sprite {
 		if (this.gameClock == null)
 			setGameClock();
 	}
+
+	private void initializeFrames(int numSprites) {
+		for (int i = 0; i < numSprites; i++) {
+			frames.add(readImage(fileName + "_" + Integer.toString(i) + ".png"));
+		}
+	}
+
+	public Animation getAnimation(String id){
+		for (int i = 0; i < animations.size(); i++){
+			if (animations.get(i).id == id){
+				return animations.get(i);
+			}
+		}
+		return null;
+	}
+
+	private void animate(Animation a){
+		this.startFrame = a.startFrame;
+		this.endFrame = a.endFrame;
+	}
+
+	private void animate(String id){
+		Animation a = getAnimation(id);
+		this.startFrame = a.startFrame;
+		this.endFrame = a.endFrame;
+	}
+
+	private void animate(int startFrame, int endFrame){
+		this.startFrame = startFrame;
+		this.endFrame = endFrame;
+	}
+
+	private void stopAnimation(int frameNumber){
+		if(this.playing) {
+			this.setCurrentFrame(frameNumber);
+			this.playing = false;
+		}
+	}
+
+	private void stopAnimation(){
+		stopAnimation(this.startFrame);
+	}
 }
