@@ -25,6 +25,7 @@ public class AnimatedSprite extends Sprite {
         this.setPosition(position);
         this.setGameClock();
         this.setAnimationSpeed(DEFAULT_ANIMATION_SPEED);
+        this.initializeFrames(4);
     }
 
     public void setFileName(String fileName) {
@@ -69,7 +70,7 @@ public class AnimatedSprite extends Sprite {
                 return animations.get(i);
             }
         }
-        return null;
+        return animations.get(0);
     }
 
     private void animate(Animation a) {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
+import edu.virginia.engine.display.AnimatedSprite;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -14,7 +15,7 @@ import edu.virginia.engine.display.Sprite;
 public class LabOneGame extends Game{
 
 	/* Create a sprite object for our game. We'll use mario */
-	Sprite mario = new Sprite("Mario", "Mario.png");
+	AnimatedSprite mario = new AnimatedSprite("Mario", "mario", new Point(0,0));
 	
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
