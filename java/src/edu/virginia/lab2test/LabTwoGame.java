@@ -33,26 +33,35 @@ public class LabTwoGame extends Game{
         super.update(pressedKeys);
 
         /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-        if(mario != null) mario.update(pressedKeys);
+        if(mario != null) {
+            mario.update(pressedKeys);
+            mario.setScaleX(3);
+            mario.setScaleY(3);
+            mario.setPlaying(false);
+        }
 
         if (pressedKeys.contains(KeyEvent.VK_UP)){
             mario.setPosition(new Point(mario.getPosition().x,
                     mario.getPosition().y - 5));
+            mario.setPlaying(true);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_DOWN)){
             mario.setPosition(new Point(mario.getPosition().x,
                     mario.getPosition().y + 5));
+            mario.setPlaying(true);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)){
             mario.setPosition(new Point(mario.getPosition().x - 5,
                     mario.getPosition().y));
+            mario.setPlaying(true);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
             mario.setPosition(new Point(mario.getPosition().x + 5,
                     mario.getPosition().y));
+            mario.setPlaying(true);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_I)){
@@ -100,7 +109,7 @@ public class LabTwoGame extends Game{
         }
 
         if (pressedKeys.contains(KeyEvent.VK_A)){
-            if(mario.getScaleX() > 0.2) {
+            if(mario.getScaleY() > 0.2) {
                 mario.setScaleX(mario.getScaleX() - 0.1);
                 mario.setScaleY(mario.getScaleY() - 0.1);
             }
@@ -109,6 +118,17 @@ public class LabTwoGame extends Game{
         if (pressedKeys.contains(KeyEvent.VK_S)){
             mario.setScaleX(mario.getScaleX() + 0.1);
             mario.setScaleY(mario.getScaleY() + 0.1);
+        }
+
+        if (pressedKeys.contains(KeyEvent.VK_EQUALS)){
+            if(mario.getAnimationSpeed() > 0.2)
+                mario.setAnimationSpeed(mario.getAnimationSpeed() - 0.1);
+            //System.out.println(mario.getAnimationSpeed());
+        }
+
+        if (pressedKeys.contains(KeyEvent.VK_MINUS)){
+            mario.setAnimationSpeed(mario.getAnimationSpeed() + 0.1);
+            //System.out.println(mario.getAnimationSpeed());
         }
 
     }

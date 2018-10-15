@@ -15,8 +15,8 @@ public class AnimatedSprite extends Sprite {
     private int currentFrame;
     private int startFrame;
     private int endFrame;
-    private static final int DEFAULT_ANIMATION_SPEED = 1;
-    private int animationSpeed;
+    private static final double DEFAULT_ANIMATION_SPEED = 1;
+    private double animationSpeed;
     private GameClock gameClock;
 
     public AnimatedSprite(String id, String fileName, Point position) {
@@ -24,7 +24,7 @@ public class AnimatedSprite extends Sprite {
         this.setFileName(fileName);
         this.setPosition(position);
         this.initGameClock();
-        this.setPlaying(true);
+        this.setPlaying(false);
         this.setAnimationSpeed(DEFAULT_ANIMATION_SPEED);
         this.initializeFrames(4);
         this.setAnimations(id,0,3);
@@ -47,9 +47,11 @@ public class AnimatedSprite extends Sprite {
         this.gameClock = new GameClock();
     }
 
-    public void setAnimationSpeed(int speed) {
+    public void setAnimationSpeed(double speed) {
         this.animationSpeed = speed;
     }
+
+    public double getAnimationSpeed() { return this.animationSpeed; }
 
     public void setCurrentFrame(int frame) {
         this.currentFrame = frame;
@@ -120,16 +122,16 @@ public class AnimatedSprite extends Sprite {
     public void draw(Graphics g) {
         // If it's playing and the right amount of time has passed, iterate through the arrayList
         if (this.playing && (this.gameClock.getElapsedTime() >= this.animationSpeed)) {
+            System.out.println(this.gameClock.getElapsedTime() + " " + this.animationSpeed);
             if (this.currentFrame == (this.endFrame - 1))
                 this.setCurrentFrame(this.startFrame);
             else
                 this.setCurrentFrame(this.currentFrame + 1);
+            // Reset the gameClock only on image change
+            this.gameClock.resetGameClock();
         }
         else
-            return;
-
-        // Reset the gameClock only on image change
-        this.gameClock.resetGameClock();
+            this.setCurrentFrame(this.startFrame);
 
         // Updates the image to the current frame
         super.setImage(this.getFileName() + "_" + this.currentFrame + ".png");
