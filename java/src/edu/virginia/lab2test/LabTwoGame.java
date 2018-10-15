@@ -122,12 +122,12 @@ public class LabTwoGame extends Game{
 
         if (pressedKeys.contains(KeyEvent.VK_EQUALS)){
             if(mario.getAnimationSpeed() > 0.2)
-                mario.setAnimationSpeed(mario.getAnimationSpeed() - 0.1);
+                mario.setAnimationSpeed(mario.getAnimationSpeed() - 4);
             //System.out.println(mario.getAnimationSpeed());
         }
 
         if (pressedKeys.contains(KeyEvent.VK_MINUS)){
-            mario.setAnimationSpeed(mario.getAnimationSpeed() + 0.1);
+            mario.setAnimationSpeed(mario.getAnimationSpeed() + 4);
             //System.out.println(mario.getAnimationSpeed());
         }
 

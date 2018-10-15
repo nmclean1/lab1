@@ -15,7 +15,7 @@ public class AnimatedSprite extends Sprite {
     private int currentFrame;
     private int startFrame;
     private int endFrame;
-    private static final double DEFAULT_ANIMATION_SPEED = 1;
+    private static final double DEFAULT_ANIMATION_SPEED = 0;
     private double animationSpeed;
     private GameClock gameClock;
 
@@ -122,7 +122,7 @@ public class AnimatedSprite extends Sprite {
     public void draw(Graphics g) {
         // If it's playing and the right amount of time has passed, iterate through the arrayList
         if (this.playing && (this.gameClock.getElapsedTime() >= this.animationSpeed)) {
-            System.out.println(this.gameClock.getElapsedTime() + " " + this.animationSpeed);
+            //System.out.println(this.gameClock.getElapsedTime() + " " + this.animationSpeed);
             if (this.currentFrame == (this.endFrame - 1))
                 this.setCurrentFrame(this.startFrame);
             else
@@ -130,11 +130,15 @@ public class AnimatedSprite extends Sprite {
             // Reset the gameClock only on image change
             this.gameClock.resetGameClock();
         }
-        else
-            this.setCurrentFrame(this.startFrame);
+        //else
+            //return;
+            //this.setCurrentFrame(this.startFrame);
 
         // Updates the image to the current frame
-        super.setImage(this.getFileName() + "_" + this.currentFrame + ".png");
+        if(this.playing)
+            super.setImage(this.getFileName() + "_" + this.currentFrame + ".png");
+        else
+            super.setImage(this.getFileName() + "_" + this.startFrame + ".png");
 
         //System.out.println(this.currentFrame + "-" + this.playing);
 
