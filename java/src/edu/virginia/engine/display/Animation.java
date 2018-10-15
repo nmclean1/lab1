@@ -6,9 +6,9 @@ public class Animation {
     private int endFrame;
 
     public Animation(String id, int startFrame, int endFrame) {
-        this.id = id;
-        this.startFrame = startFrame;
-        this.endFrame = endFrame;
+        this.setId(id);
+        this.setStartFrame(startFrame);
+        this.setEndFrame(endFrame);
     }
 
     public void setEndFrame(int endFrame) {
