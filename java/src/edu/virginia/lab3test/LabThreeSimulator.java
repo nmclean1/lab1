@@ -6,13 +6,12 @@ import java.util.ArrayList;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.display.AnimatedSprite;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabThreeGame extends Game{
+public class LabThreeSimulator extends Game{
 
     /* Create a sprite object for our game. We'll use sun */
     Sprite sun = new Sprite("Sun", "Sun_0.png");
@@ -20,7 +19,7 @@ public class LabThreeGame extends Game{
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
-    public LabThreeGame() {
+    public LabThreeSimulator() {
         super("Lab One Test Game", 500, 300);
     }
 
@@ -97,7 +96,7 @@ public class LabThreeGame extends Game{
      * that calls update() and draw() every frame
      * */
     public static void main(String[] args) {
-        LabThreeGame game = new LabThreeGame();
+        LabThreeSimulator game = new LabThreeSimulator();
         game.start();
 
     }
