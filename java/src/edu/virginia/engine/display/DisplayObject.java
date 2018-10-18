@@ -93,6 +93,8 @@ public class DisplayObject {
 
 	public double getScaleY() { return scaleY; }
 
+	public void setScale(double scale) {this.setScaleX(scale); this.setScaleY(scale);}
+
 	public void setId(String id) {
 		this.id = id;
 	}
