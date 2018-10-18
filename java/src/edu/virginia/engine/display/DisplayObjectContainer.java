@@ -1,6 +1,10 @@
 package edu.virginia.engine.display;
 
+import com.sun.prism.shader.DrawCircle_ImagePattern_Loader;
+
 import java.util.ArrayList;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class DisplayObjectContainer extends DisplayObject {
 
@@ -8,10 +12,12 @@ public class DisplayObjectContainer extends DisplayObject {
 
     public DisplayObjectContainer(String id) {
         super(id);
+        this.children = new ArrayList<DisplayObject>();
     }
 
     public DisplayObjectContainer(String id, String imageFileName) {
         super(id,imageFileName);
+        this.children = new ArrayList<DisplayObject>();
     }
 
     public void addChild(DisplayObject child) {
@@ -32,6 +38,57 @@ public class DisplayObjectContainer extends DisplayObject {
 
     public void removeAll() {
         this.children = new ArrayList<DisplayObject>();
+    }
+
+    public boolean contains(DisplayObject obj) {
+        return this.children.contains(obj);
+    }
+
+    // Can return null if there is no child with that id!
+    public DisplayObject getChild(String id) {
+        int i;
+        for (i=0;i<this.children.size();i++) {
+            if (this.children.get(i).getId() == id) {
+                return this.children.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public DisplayObject getChild(int index) {
+        return this.children.get(index);
+    }
+
+    public ArrayList<DisplayObject> getChildren() {
+        return this.children;
+    }
+
+    /* Draw and update DO NOT protect against infinite loops, you MAY put yourself inside your children!
+     * Don't do this though, that's dumb */
+
+    @Override public void draw(Graphics g) {
+        super.draw(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        applyTransformations(g2d);
+        int i;
+
+        for (i=0;i < this.children.size();i++) {
+            this.children.get(i).draw(g);
+        }
+
+        reverseTransformations(g2d);
+    }
+
+    @Override public void update(ArrayList<Integer> pressedKeys) {
+        super.update(pressedKeys); // Update myself
+
+        int i;
+        for (i=0;i <this.children.size();i++) {
+            this.children.get(i).update(pressedKeys); // Update my children
+        }
     }
 
 }
