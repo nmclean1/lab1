@@ -113,6 +113,8 @@ public class DisplayObject {
 
 	public int getRotation() { return rotation; }
 
+	public DisplayObject getParent() { return parent; }
+
 
 	/**
 	 * Returns the unscaled width and height of this display object

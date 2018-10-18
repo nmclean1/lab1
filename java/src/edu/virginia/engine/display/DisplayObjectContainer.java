@@ -64,6 +64,28 @@ public class DisplayObjectContainer extends DisplayObject {
         return this.children;
     }
 
+    public Point localToGlobal(Point p){
+        DisplayObject parent = this.getParent();
+        if(parent.getId() == "Game"){
+            return p;
+        }
+        else{
+            Point parentPosition = parent.getPosition();
+            return new Point((int) (p.getX() + localToGlobal(parentPosition).getX()), (int) (p.getY() + localToGlobal(parentPosition).getY()));
+        }
+    }
+
+    public Point globalToLocal(Point p){
+        DisplayObject parent = this.getParent();
+        if(parent.getId() == "Lab Three Test Game"){
+            return p;
+        }
+        else{
+            Point parentPosition = parent.getPosition();
+            return new Point((int) (p.getX() - localToGlobal(parentPosition).getX()), (int) (p.getY() - localToGlobal(parentPosition).getY()));
+        }
+    }
+
     /* Draw and update DO NOT protect against infinite loops, you MAY put yourself inside your children!
      * Don't do this though, that's dumb */
 
