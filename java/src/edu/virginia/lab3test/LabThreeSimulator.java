@@ -113,7 +113,7 @@ public class LabThreeSimulator extends Game{
 
 
         if(earth != null) {
-            earth.setRotation(earth.getRotation() + 5);
+            earth.setRotation(earth.getRotation() + 3);
         }
 
         if(moon != null) {
@@ -121,7 +121,7 @@ public class LabThreeSimulator extends Game{
         }
 
         if (mercury != null) {
-            mercury.setRotation(mercury.getRotation() + 5);
+            mercury.setRotation(mercury.getRotation() + 7);
         }
 
         if (mercuryMoon != null) {
