@@ -1,0 +1,107 @@
+<html>
+<title> Learning Content </title>
+<h3>jsspiegel nmclean Learning Content </h3>
+
+<strong>
+<br><br>
+The purpose of this exercise is to define the learning content in your game.
+You need to choose what subject you are going to teach (mathematics, programming,
+history, ethics, finance, etc.), what age group you are targeting, and what 
+specific aspects of that subject you are going to tackle. You need to show that
+you understand the educational aspects of this course, especially learning 
+trajectories and the gradual, stairstep nature of teaching / learning a 
+subject.
+<br><br>
+You are going to present a design that is more complete than what you are going
+to be expected to implement. For your design, imaging that you have a full
+design and implementation team, so implementation time is not a constraint. 
+You will later carve out a subset of this design to complete for this course.
+<br><br>
+Keep in all the html. Place in your design directory of your repository. 
+You and your partner fill in your CNETIDs - you only need to submit to one of your
+svn repositories.
+<br><br>
+Summarize your content area in 1-2 paragraphs.
+<br><br>
+</strong>
+We wanted to teach logic through our game in a more fun, interactive way than logic is usually taught. Since logical thinking is usually introduced alongside proofs or basic programming, neither of which are covered until late high school at best, students are already well-conditioned to either dismiss it or latch on. By this period of development, a mathphobic student would have already acquired the anxiety that pushes them away from math and therefore logic (since the two are usually taught closely). We hope that by introducing fundamental logic earlier and through an active-learning lens, students can feel less intimidated by logic.
+<br><br>
+Since we want to start early in the learning process, we chose logical expression and boolean operators to be our topic. Throughout our game, we hope to introduce the basic logical operators (and, or, xor, not) and, through scaffolding, teach them to deconstruct large logical expressions to true, false, or possibly a single variable. While this content is the foundation for our game, we are also considering expanding to the topic of evaluating the control flow of a program.
+<br><br>
+<strong>
+Describe the age of your user and the skills that you assume the user already has 
+(that is relevant to your content). Your user must be in at least 3rd grade.
+<br><br>
+</strong>
+We are intending for this game to be for players in approximately sixth grade. The content taught in this game (boolean logic) is typically not learned until high school or even early college, but we believe this is due to a lack of CS education until that time, as boolean logic is typically only taught in that setting. The concepts themselves are actually quite simple to learn, and we believe that sixth graders are more than capable of learning and mastering them. We are assuming that the user already understands the concept of “true” and “false,” as these are common concepts beyond CS, and crucial to learning and understanding boolean expressions. The other concept that we assume sixth graders will have knowledge of is simplification of small expressions. This concept should be familiar by sixth grade due to its use in math.
+<br><br>
+<strong>
+Describe what skills you are going to teach your user.
+<br><br>
+</strong>
+In this game we hope to teach the user what various boolean logic expressions mean, and how to simplify complex boolean expressions to true or false. If it’s not too complicated, we may introduce short-circuit logic (true OR x = true).
+<br><br>
+<strong>
+Diagram a learning trajectory for this subject that starts with existing relevant
+skills on the left-most side and progresses through knowledge they would learn
+in a game like yours (your game won't need to cover all of this).
+<br><br>
+</strong>
+<img src="LT.png"/>
+<br><br>
+<strong>
+Describe your sources and methodology for creating your learning trajectory. It
+cannot be just made up yourself - you need to draw upon existing examples or 
+justify the reasons why you have created it in that way.
+<br><br>
+</strong>
+<a href="https://dl.acm.org/citation.cfm?doid=3141880.3141885">Finnish Education Research</a>: Researchers in Finland explored how teachers attempted and planned to introduce computational thinking in K-12 classes. The teachers mentioned many different possible areas of focus but a clear standout was the requirement of logical thinking (even a mention of truth tables) as a building block of CT in students.
+<br>
+<a href="https://introcs.cs.princeton.edu/java/71boolean/">Princeton Boolean Logic Curriculum</a>:
+This gives insight into what order to teach boolean expressions in, and also gave us the idea for ands/ors with more than two variables).
+<br><br>
+<strong>
+First summarize the game type, placing it into a genre. What is a well-known game that most closely resembles your game? And what are the major differences between yours and that game? 
+</strong>
+<br><br>
+We would define this game as a puzzle/arcade game. The game Opus Magnum is a highly popular computer game that is similar to the premise of ours but also quite different. Opus Magnum teaches logical and complex programming techniques from the perspective of a alchemical machine. By combining parts, you unknowingly change the contents and output of a loop, which needs to be run repeatedly to form a end product. 
+<br>
+Our game is different because the focus is much more on more basic concepts of logical thinking and problem-solving. Instead of a complex user-defined machine, we use a series of multi-colored wires to form an existing machine that can be modified. A significant amount of time and importance in Opus Magnum is placed on optimizing your machine, but basic logical equations don’t need to be made “more efficient” so this aspect of gameplay is not present. Opus Magnum is a game designed for an entirely different, much older playerbase with much more programming experience. We intend to educate a younger audience in a more user-friendly and less intimidating manner.
+<br><br>
+<strong>
+Describe your game, taking care to describe the different elements such as premise, rules, etc.
+</strong>
+<br><br>
+Our game is about defusing a bomb. The process of doing so is abstracted into solving a logical equation (for example (T xor F) = ?). The goal for a given level is depicted in the defuser at one end of the screen, which may show either True or False to correctly defuse. One wire leads from that which may expand outwards into many logic gates and other wires. Each wire is color-coded to show it’s boolean value: either red or green. Also, a timer in the top right corner ticks down, reminding the player that they are working with a volatile weapon and need to work quickly.
+<br><br>
+The player has two different abilities, they may cut a wire to negate its value, or they may add a gate or wire from a given pool. For example, if the defuser requires True and there is a single wire showing False and the player has a Not gate in their pool, they may place the gate on the wire, changing the value and solving the puzzle. Each of these mechanics will be introduced separately, so as to allow the player to become adjusted to them. Once the player progresses into more complex levels, certain wires may be protected from cutting and/or gate-placing. This prevents a complex logical equation from being solved by placing a single Not gate at the end, and other mechanic abuses. 
+<br><br>
+<strong>
+Describe how your choices of elements above will result in the keys to successful game design, such as increasing difficulty, engaging players' attention, as well as resulting in learning. 
+</strong>
+<br><br>
+The elements we chose will be easy to understand, fun to tinker with, and perfect for adding together to create complexity. The wires and gates are simple on their own, and the color of the wires is very intuitive. We hope that the timer will also keep players’ attention because it pressures them to make faster decisions and therefore become more at ease with the equations. The way we present the logical equations, as bombs to be defused, is much more engaging than they are often shown. Instead of a problem that looks like a math problem to be solved, the player is presented with a multi-layered, colorful puzzle. This will be much more appealing to solve, and hopefully reduce math anxiety as well!
+<br><br>
+<strong>
+Describe how different "player types" will find something that engages them. 
+</strong>
+<br><br>
+<ul>
+<li>Competitor: The combination of the game’s timed mechanic and a scoreboard for top times will incentivize the Competitor to play and replay the game in an attempt to progressively increase their own score and beat their friends and other players.</li>
+<li>Collector: A “hall-of-fame” mechanic could store all bombs that the player has previously defused, giving the Collector a visual archive of their achievements and play history that they can go back and review.</li>
+<li>Achiever: The Achiever will be motivated by always wanting to reach the next level, defuse the next bomb, master the next boolean operator. We could also implement an achievement system for accomplishments like defusing a certain number of bombs, defusing a sufficiently complex bomb within a small amount of time, etc.</li>
+<li>Artist: The game will engage the Artist by allowing them to come up with creative, elegant solutions to the problem presented by each bomb. </li>
+<li>Director: The Director is given complete control over the game world of each bomb, put in charge of making all of the decisions and responsible for defusing the bomb.</li>
+<li>Craftsman: The Craftsman will be given the opportunity to puzzle out solutions to each bomb, a system that requires intricate thinking in order to successfully defuse.</li>
+</ul>
+Unfortunately, there is not as much in this game that directly appeals to the Explorer, Joker, Storyteller, or Performer. However, we don’t see this as a significant problem. First, few games engage every single type of player - different types of games appeal to different types of players. Second, most players are not of a single type, and the game will appeal to at least one aspect of their player personality - for example, the vast majority of people, and therefore players, are competitive, and will thus be drawn to the competitive aspects of the game.
+<br><br>
+<strong>
+Describe how your game makes the user progress through the different elements in the learning trajectory you produced. How do you teach different elements and how do you gradually increase the difficulty and/or complexity as users progress through the levels?
+</strong>
+<br><br>
+The game makes the user progress through the different elements in the learning trajectory via a structured series of levels that teaches the various boolean operators in an order, so that users will have developed an understanding and mastery of simple boolean operators in isolation before moving onto complex combinations of operators. For example, there will be several different routes in the beginning: a route that teaches the player what a Not gate does, one for And gates, and one for Or gates. Once all three have been completed, the player can advance to a (or multiple) more complex route that has higher rewards but is magnitudes more difficult. 
+
+
+
+</html>
