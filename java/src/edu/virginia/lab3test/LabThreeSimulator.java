@@ -54,6 +54,7 @@ public class LabThreeSimulator extends Game{
         mercury.setPivotPoint(new Point(sun.getUnscaledWidth()/2-mercury.getPosition().x,sun.getUnscaledHeight()/2-mercury.getPosition().y));
         moon.setPivotPoint(new Point(earth.getUnscaledWidth()/2-(moon.getPosition().x),earth.getUnscaledHeight()/2-(moon.getPosition().y)));
         mercuryMoon.setPivotPoint(new Point(mercury.getUnscaledWidth()/2-mercuryMoon.getPosition().x,mercury.getUnscaledHeight()/2-mercuryMoon.getPosition().y));
+        sun.setPivotPoint(new Point(sun.getPosition().x+sun.getUnscaledWidth()/2,sun.getPosition().y+sun.getUnscaledHeight()/2));
     }
 
     /**
@@ -72,41 +73,65 @@ public class LabThreeSimulator extends Game{
         if (pressedKeys.contains(KeyEvent.VK_UP)){
             sun.setPosition(new Point(sun.getPosition().x,
                     sun.getPosition().y - 5));
+
+            // Pivot point has to change with movement to center on sun
+            sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,(int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
         if (pressedKeys.contains(KeyEvent.VK_DOWN)){
             sun.setPosition(new Point(sun.getPosition().x,
                     sun.getPosition().y + 5));
+
+            // Pivot point has to change with movement to center on sun
+            sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,(int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)){
             sun.setPosition(new Point(sun.getPosition().x - 5,
                     sun.getPosition().y));
+
+            // Pivot point has to change with movement to center on sun
+            sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,(int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
             sun.setPosition(new Point(sun.getPosition().x + 5,
                     sun.getPosition().y));
-        }
 
-        if (pressedKeys.contains(KeyEvent.VK_W)){
-            sun.setRotation(sun.getRotation() + 5);
-        }
-
-        if (pressedKeys.contains(KeyEvent.VK_Q)){
-            sun.setRotation(sun.getRotation() - 5);
+            // Pivot point has to change with movement to center on sun
+            sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,(int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
         if (pressedKeys.contains(KeyEvent.VK_A)){
+            sun.setRotation(sun.getRotation() + 5);
+        }
+
+        if (pressedKeys.contains(KeyEvent.VK_S)){
+            sun.setRotation(sun.getRotation() - 5);
+        }
+
+        if (pressedKeys.contains(KeyEvent.VK_W)){
             if(sun.getScaleY() > 0.2) {
                 sun.setScaleX(sun.getScaleX() - 0.1);
                 sun.setScaleY(sun.getScaleY() - 0.1);
             }
+
+            // Pivot point has to change with scaling
+            sun.setPivotPoint(new Point(sun.getPosition().x + (int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,sun.getPosition().y + (int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
-        if (pressedKeys.contains(KeyEvent.VK_S)){
+        if (pressedKeys.contains(KeyEvent.VK_Q)){
             sun.setScaleX(sun.getScaleX() + 0.1);
             sun.setScaleY(sun.getScaleY() + 0.1);
+
+            // Pivot point has to change with scaling
+            sun.setPivotPoint(new Point(sun.getPosition().x + (int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,sun.getPosition().y + (int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
         /* Automatic rotation of major planets */
