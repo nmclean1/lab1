@@ -72,7 +72,7 @@ public class LabThreeSimulator extends Game{
 
         if (pressedKeys.contains(KeyEvent.VK_UP)){
             sun.setPosition(new Point(sun.getPosition().x,
-                    sun.getPosition().y - 5));
+                    sun.getPosition().y + 5));
 
             // Pivot point has to change with movement to center on sun
             sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
@@ -81,7 +81,7 @@ public class LabThreeSimulator extends Game{
 
         if (pressedKeys.contains(KeyEvent.VK_DOWN)){
             sun.setPosition(new Point(sun.getPosition().x,
-                    sun.getPosition().y + 5));
+                    sun.getPosition().y - 5));
 
             // Pivot point has to change with movement to center on sun
             sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
@@ -89,7 +89,7 @@ public class LabThreeSimulator extends Game{
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)){
-            sun.setPosition(new Point(sun.getPosition().x - 5,
+            sun.setPosition(new Point(sun.getPosition().x + 5,
                     sun.getPosition().y));
 
             // Pivot point has to change with movement to center on sun
@@ -98,7 +98,7 @@ public class LabThreeSimulator extends Game{
         }
 
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
-            sun.setPosition(new Point(sun.getPosition().x + 5,
+            sun.setPosition(new Point(sun.getPosition().x - 5,
                     sun.getPosition().y));
 
             // Pivot point has to change with movement to center on sun
@@ -121,8 +121,8 @@ public class LabThreeSimulator extends Game{
             }
 
             // Pivot point has to change with scaling
-            sun.setPivotPoint(new Point(sun.getPosition().x + (int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
-                    ,sun.getPosition().y + (int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
+            sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,(int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
         if (pressedKeys.contains(KeyEvent.VK_Q)){
@@ -130,8 +130,8 @@ public class LabThreeSimulator extends Game{
             sun.setScaleY(sun.getScaleY() + 0.1);
 
             // Pivot point has to change with scaling
-            sun.setPivotPoint(new Point(sun.getPosition().x + (int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
-                    ,sun.getPosition().y + (int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
+            sun.setPivotPoint(new Point((int)(sun.getUnscaledWidth()/2 * sun.getScaleX())
+                    ,(int)(sun.getUnscaledHeight()/2 * sun.getScaleY())));
         }
 
         /* Automatic rotation of major planets */
