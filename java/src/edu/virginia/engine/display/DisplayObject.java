@@ -39,6 +39,8 @@ public class DisplayObject {
 
 	private double scaleY;
 
+	private Rectangle hitbox;
+
 	private DisplayObject parent;
 
 	/**
@@ -58,6 +60,7 @@ public class DisplayObject {
 		this.setOldAlpha(0.0f);
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
+		this.initHitBox();
 	}
 
 	public DisplayObject(String id, String fileName) {
@@ -71,6 +74,7 @@ public class DisplayObject {
 		this.setOldAlpha(0.0f);
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
+		this.initHitBox();
 	}
 
 	public void setVisible(Boolean visible) { this.visible = visible; }
@@ -117,6 +121,20 @@ public class DisplayObject {
 
 	public DisplayObject getParent() { return parent; }
 
+	public Rectangle getHitbox() {
+		return hitbox;
+	}
+
+	// Initialize the hitbox of the displayObject
+	public void initHitBox() {
+		Point pos = this.getPosition();
+		Rectangle box = new Rectangle(pos.x,pos.y,this.getUnscaledWidth(),this.getUnscaledHeight());
+		this.hitbox = box;
+	}
+
+	public boolean collidesWith(DisplayObject other) {
+		return this.getHitbox().intersects(other.getHitbox());
+	}
 
 	/**
 	 * Returns the unscaled width and height of this display object
@@ -197,7 +215,9 @@ public class DisplayObject {
 			g2d.drawImage(displayImage, 0, 0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
-			
+
+			g2d.draw(this.getHitbox());
+
 			/*
 			 * undo the transformations so this doesn't affect other display
 			 * objects
