@@ -1,5 +1,7 @@
 package edu.virginia.engine.display;
 
+import org.w3c.dom.css.Rect;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -132,8 +134,17 @@ public class DisplayObject {
 		this.hitbox = box;
 	}
 
-	public boolean collidesWith(DisplayObject other) {
-		return this.getHitbox().intersects(other.getHitbox());
+	public void updateHitBox() {
+		Point pos = this.getPosition();
+		Rectangle old = this.hitbox;
+		Rectangle box = new Rectangle(pos.x,pos.y,(old.width),(old.height));
+		this.hitbox = box;
+	}
+
+	public void updateHitBoxScale() {
+		Rectangle old = this.hitbox;
+		Rectangle box = new Rectangle(old.x,old.y,(int)(this.getUnscaledWidth()*this.getScaleX()),(int)(this.getUnscaledHeight()*this.getScaleY()));
+		this.hitbox = box;
 	}
 
 	/**
@@ -216,13 +227,12 @@ public class DisplayObject {
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
 
-			g2d.draw(this.getHitbox());
-
 			/*
 			 * undo the transformations so this doesn't affect other display
 			 * objects
 			 */
 			reverseTransformations(g2d);
+			g2d.draw(this.getHitbox());
 		}
 	}
 

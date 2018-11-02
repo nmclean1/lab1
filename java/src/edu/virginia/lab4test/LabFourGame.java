@@ -3,11 +3,15 @@ package edu.virginia.lab4test;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.util.GameClock;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.display.AnimatedSprite;
+import edu.virginia.engine.display.DisplayObjectContainer;
+import org.w3c.dom.css.Rect;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -17,6 +21,8 @@ public class LabFourGame extends Game{
 
     /* Create a sprite object for our game. We'll use mario */
     Sprite mario = new Sprite("Mario", "Mario.png");
+    Sprite door = new Sprite("Door","Door.png");
+    Sprite goomba = new Sprite("Goomba","Goomba.png");
     private GameClock gameClock;
     private double visibilityTimer = 0;
 
@@ -24,8 +30,12 @@ public class LabFourGame extends Game{
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabFourGame() {
-        super("Lab One Test Game", 500, 300);
+        super("Game", 1500, 1300);
         this.initGameClock();
+        door.setPosition(new Point(1000,1000));
+        goomba.setPosition(new Point(210,250));
+        door.updateHitBox();
+        goomba.updateHitBox();
     }
 
     public void setGameClock() {
@@ -35,6 +45,29 @@ public class LabFourGame extends Game{
     public void initGameClock() {
         if (this.gameClock == null)
             setGameClock();
+    }
+
+    // Is mario colliding with the object?
+    public boolean collidesWith(DisplayObject other) {
+        // Make sure the math is done in the same point system
+        Rectangle hb = mario.getHitbox();
+        Rectangle ohb = other.getHitbox();
+        Point phb = this.localToGlobal(hb.getLocation());
+        Point pohb = this.localToGlobal(ohb.getLocation());
+
+    /*
+        if (phb.x + hb.width > pohb.x && phb.x < pohb.x+ohb.width)
+            System.out.println("WIDTH");
+
+        if (phb.y + hb.height > pohb.y && phb.y < pohb.y+ohb.height)
+            System.out.println("HEIGHT");
+        */
+
+        // Width is overlapping - height is overlapping
+        return ((phb.x + hb.width > pohb.x && phb.x < pohb.x+ohb.width) &&
+                (phb.y + hb.height > pohb.y && phb.y < pohb.y+ohb.height));
+
+        //System.out.println(phb.toString() + " Mario--goomba " + pohb.toString());
     }
 
     /**
@@ -51,21 +84,25 @@ public class LabFourGame extends Game{
         if (pressedKeys.contains(KeyEvent.VK_UP)){
             mario.setPosition(new Point(mario.getPosition().x,
                     mario.getPosition().y - 5));
+            mario.updateHitBox();
         }
 
         if (pressedKeys.contains(KeyEvent.VK_DOWN)){
             mario.setPosition(new Point(mario.getPosition().x,
                     mario.getPosition().y + 5));
+            mario.updateHitBox();
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)){
             mario.setPosition(new Point(mario.getPosition().x - 5,
                     mario.getPosition().y));
+            mario.updateHitBox();
         }
 
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
             mario.setPosition(new Point(mario.getPosition().x + 5,
                     mario.getPosition().y));
+            mario.updateHitBox();
         }
 
         if (pressedKeys.contains(KeyEvent.VK_I)){
@@ -119,12 +156,24 @@ public class LabFourGame extends Game{
             if(mario.getScaleX() > 0.2) {
                 mario.setScaleX(mario.getScaleX() - 0.1);
                 mario.setScaleY(mario.getScaleY() - 0.1);
+                mario.updateHitBoxScale();
             }
         }
 
         if (pressedKeys.contains(KeyEvent.VK_S)){
             mario.setScaleX(mario.getScaleX() + 0.1);
             mario.setScaleY(mario.getScaleY() + 0.1);
+            mario.updateHitBoxScale();
+        }
+
+        /* Collision-handling */
+        if (mario != null && goomba != null && door != null) {
+            if (collidesWith(goomba))
+                System.out.println("DANGER");
+
+            if (collidesWith(door))
+                System.out.println("WIN");
+
         }
 
     }
@@ -140,6 +189,12 @@ public class LabFourGame extends Game{
         /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
         if(mario != null && mario.getVisible())
             mario.draw(g);
+
+        if (goomba != null && goomba.getVisible())
+            goomba.draw(g);
+
+        if (door != null && door.getVisible())
+            door.draw(g);
     }
 
     /**

@@ -66,7 +66,7 @@ public class DisplayObjectContainer extends DisplayObject {
 
     public Point localToGlobal(Point p){
         DisplayObject parent = this.getParent();
-        if(parent.getId() == "Game"){
+        if(this.getId() == "Game" || parent.getId() == "Game"){
             return p;
         }
         else{
