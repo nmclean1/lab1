@@ -3,6 +3,7 @@ package edu.virginia.lab4test;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import edu.virginia.engine.util.GameClock;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
@@ -16,12 +17,24 @@ public class LabFourGame extends Game{
 
     /* Create a sprite object for our game. We'll use mario */
     Sprite mario = new Sprite("Mario", "Mario.png");
+    private GameClock gameClock;
+    private double visibilityTimer = 0;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabFourGame() {
         super("Lab One Test Game", 500, 300);
+        this.initGameClock();
+    }
+
+    public void setGameClock() {
+        this.gameClock = new GameClock();
+    }
+
+    public void initGameClock() {
+        if (this.gameClock == null)
+            setGameClock();
     }
 
     /**
@@ -84,7 +97,10 @@ public class LabFourGame extends Game{
         }
 
         if (pressedKeys.contains(KeyEvent.VK_V)){
-            mario.setVisible(!mario.getVisible());
+            if(this.gameClock.getElapsedTime() - this.visibilityTimer > 300) {
+                mario.setVisible(!mario.getVisible());
+                this.visibilityTimer = this.gameClock.getElapsedTime();
+            }
         }
 
         if (pressedKeys.contains(KeyEvent.VK_Z)){
