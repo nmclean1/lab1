@@ -34,8 +34,8 @@ public class LabFourGame extends Game{
         this.initGameClock();
         door.setPosition(new Point(1000,1000));
         goomba.setPosition(new Point(210,250));
-        door.updateHitBox();
-        goomba.updateHitBox();
+        door.updateHitBox(1000,1000);
+        goomba.updateHitBox(210,250);
     }
 
     public void setGameClock() {
@@ -50,10 +50,10 @@ public class LabFourGame extends Game{
     // Is mario colliding with the object?
     public boolean collidesWith(DisplayObject other) {
         // Make sure the math is done in the same point system
-        Rectangle hb = mario.getHitbox();
-        Rectangle ohb = other.getHitbox();
-        Point phb = this.localToGlobal(hb.getLocation());
-        Point pohb = this.localToGlobal(ohb.getLocation());
+        Shape hb = mario.getHitbox();
+        Shape ohb = other.getHitbox();
+        Point phb = this.localToGlobal(mario.getPosition());
+        Point pohb = this.localToGlobal(other.getPosition());
 
     /*
         if (phb.x + hb.width > pohb.x && phb.x < pohb.x+ohb.width)
@@ -64,8 +64,7 @@ public class LabFourGame extends Game{
         */
 
         // Width is overlapping - height is overlapping
-        return ((phb.x + hb.width > pohb.x && phb.x < pohb.x+ohb.width) &&
-                (phb.y + hb.height > pohb.y && phb.y < pohb.y+ohb.height));
+        return hb.intersects(pohb.x,pohb.y,other.getUnscaledWidth(),other.getUnscaledHeight());
 
         //System.out.println(phb.toString() + " Mario--goomba " + pohb.toString());
     }
@@ -84,25 +83,25 @@ public class LabFourGame extends Game{
         if (pressedKeys.contains(KeyEvent.VK_UP)){
             mario.setPosition(new Point(mario.getPosition().x,
                     mario.getPosition().y - 5));
-            mario.updateHitBox();
+            mario.updateHitBox(0,-5);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_DOWN)){
             mario.setPosition(new Point(mario.getPosition().x,
                     mario.getPosition().y + 5));
-            mario.updateHitBox();
+            mario.updateHitBox(0,5);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)){
             mario.setPosition(new Point(mario.getPosition().x - 5,
                     mario.getPosition().y));
-            mario.updateHitBox();
+            mario.updateHitBox(-5,0);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
             mario.setPosition(new Point(mario.getPosition().x + 5,
                     mario.getPosition().y));
-            mario.updateHitBox();
+            mario.updateHitBox(5,0);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_I)){
@@ -127,10 +126,12 @@ public class LabFourGame extends Game{
 
         if (pressedKeys.contains(KeyEvent.VK_W)){
             mario.setRotation(mario.getRotation() + 5);
+            mario.updateHitBoxRotate(5);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_Q)){
             mario.setRotation(mario.getRotation() - 5);
+            mario.updateHitBoxRotate(-5);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_V)){
@@ -167,6 +168,8 @@ public class LabFourGame extends Game{
         }
 
         /* Collision-handling */
+
+        /*
         if (mario != null && goomba != null && door != null) {
             if (collidesWith(goomba))
                 System.out.println("DANGER");
@@ -174,7 +177,7 @@ public class LabFourGame extends Game{
             if (collidesWith(door))
                 System.out.println("WIN");
 
-        }
+        }*/
 
     }
 
@@ -195,6 +198,8 @@ public class LabFourGame extends Game{
 
         if (door != null && door.getVisible())
             door.draw(g);
+
+       // Graphics2D g2d = (Graphics2D)g;
     }
 
     /**

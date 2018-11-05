@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.geom.AffineTransform;
 
 import javax.imageio.ImageIO;
 
@@ -41,7 +42,7 @@ public class DisplayObject {
 
 	private double scaleY;
 
-	private Rectangle hitbox;
+	private Shape hitbox;
 
 	private DisplayObject parent;
 
@@ -123,7 +124,7 @@ public class DisplayObject {
 
 	public DisplayObject getParent() { return parent; }
 
-	public Rectangle getHitbox() {
+	public Shape getHitbox() {
 		return hitbox;
 	}
 
@@ -134,17 +135,33 @@ public class DisplayObject {
 		this.hitbox = box;
 	}
 
-	public void updateHitBox() {
+	public void updateHitBoxRotate(int rot) {
+		Point pp = this.getPivotPoint();
 		Point pos = this.getPosition();
-		Rectangle old = this.hitbox;
-		Rectangle box = new Rectangle(pos.x,pos.y,(old.width),(old.height));
-		this.hitbox = box;
+		AffineTransform tx = new AffineTransform();
+		tx.rotate(Math.toRadians(rot),pp.x+pos.x,pp.y+pos.y);
+		Shape newShape = tx.createTransformedShape(this.getHitbox());
+		this.hitbox = newShape;
+	}
+
+	public void updateHitBox(int x, int y) {
+		Point pos = this.getPosition();
+		AffineTransform tx = new AffineTransform();
+		tx.setToTranslation(x,y);
+		Shape newShape = tx.createTransformedShape(this.getHitbox());
+		this.hitbox = newShape;
 	}
 
 	public void updateHitBoxScale() {
-		Rectangle old = this.hitbox;
-		Rectangle box = new Rectangle(old.x,old.y,(int)(this.getUnscaledWidth()*this.getScaleX()),(int)(this.getUnscaledHeight()*this.getScaleY()));
-		this.hitbox = box;
+		AffineTransform tx = new AffineTransform();
+		Point pos = this.getPosition();
+		int rot = this.getRotation();
+		Point pp = this.getPivotPoint();
+		Rectangle newrec = new Rectangle(pos.x,pos.y,(int)(this.getUnscaledWidth()*this.getScaleX()),(int)(this.getUnscaledHeight()*this.getScaleY()));
+		tx.rotate(Math.toRadians(rot),pp.x+pos.x,pp.y+pos.y);
+		Shape newShape = tx.createTransformedShape(newrec);
+		this.hitbox = newShape;
+		//System.out.println(pos.toString() +" " +this.getUnscaledWidth()*this.getScaleX() +"--" + newrec.toString());
 	}
 
 	/**
