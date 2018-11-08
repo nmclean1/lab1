@@ -23,6 +23,8 @@ public class LabFourGame extends Game{
     private double visibilityTimer = 0;
     SoundManager SM = new SoundManager();
     boolean hitPlayed = false;
+    int score = 1000;
+    boolean youWin = false;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
@@ -175,6 +177,7 @@ public class LabFourGame extends Game{
             if (collidesWith(goomba) && !hitPlayed) {
                 hitPlayed = true;
                 SM.PlaySoundEffect("Hit");
+                score -= 100;
             }
 
             if(!collidesWith(goomba)){
@@ -182,10 +185,15 @@ public class LabFourGame extends Game{
             }
 
 
-            //if (collidesWith(door))
+            if (collidesWith(door)) {
+                youWin = true;
+            }
 
 
         }
+
+        if (youWin)
+            SM.getMusicHashmap().get("Music").stop();
 
     }
 
@@ -197,15 +205,24 @@ public class LabFourGame extends Game{
     public void draw(Graphics g){
         super.draw(g);
 
-        /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-        if(mario != null && mario.getVisible())
-            mario.draw(g);
+        if (!youWin) {
+            /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
+            if (mario != null && mario.getVisible())
+                mario.draw(g);
 
-        if (goomba != null && goomba.getVisible())
-            goomba.draw(g);
+            if (goomba != null && goomba.getVisible())
+                goomba.draw(g);
 
-        if (door != null && door.getVisible())
-            door.draw(g);
+            if (door != null && door.getVisible())
+                door.draw(g);
+
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+            g.drawString(Integer.toString(score), 100, 100);
+        }
+        else {
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+            g.drawString("Congratulations! You won with " + score, 500, 500);
+        }
 
        // Graphics2D g2d = (Graphics2D)g;
     }

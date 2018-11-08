@@ -51,4 +51,8 @@ public class SoundManager {
         musicHashmap.get(id).start();
         musicHashmap.get(id).loop(Clip.LOOP_CONTINUOUSLY);
     }
+
+    public static HashMap<String, Clip> getMusicHashmap() {
+        return musicHashmap;
+    }
 }
