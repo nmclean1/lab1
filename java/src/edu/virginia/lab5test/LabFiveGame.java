@@ -30,6 +30,8 @@ public class LabFiveGame extends Game{
     double newTime = 0;
     double deltaTime = 0;
     double g = 0.1;
+    Point oldPos = new Point(0,0);
+    double lastJumpTime = 0;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
@@ -96,16 +98,9 @@ public class LabFiveGame extends Game{
         /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
         if(mario != null) mario.update(pressedKeys);
 
-        if (pressedKeys.contains(KeyEvent.VK_UP)){
-            mario.setPosition(new Point(mario.getPosition().x,
-                    mario.getPosition().y - 5));
-            mario.updateHitBox(0,-5);
-        }
-
-        if (pressedKeys.contains(KeyEvent.VK_DOWN)){
-            mario.setPosition(new Point(mario.getPosition().x,
-                    mario.getPosition().y + 5));
-            mario.updateHitBox(0,5);
+        if (pressedKeys.contains(KeyEvent.VK_UP) && collidesWith(floor)){
+            mario.setUpVelocity(-35);
+            lastJumpTime = this.gameClock.getElapsedTime();
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)){
@@ -189,20 +184,22 @@ public class LabFiveGame extends Game{
             newTime = this.gameClock.getElapsedTime();
             deltaTime = newTime - oldTime;
 
-            if (mario.hasPhysics && oldTime != 0) {
+            if (mario.hasPhysics && oldTime != 0 && !(collidesWith(floor) && Math.abs(mario.getUpVelocity()) < 0.1)) {
                 mario.setUpVelocity(mario.getUpVelocity() + g * deltaTime);
                 mario.setPosition(new Point(mario.getPosition().x,
                         (int) (mario.getPosition().y + mario.getUpVelocity())));
-                mario.updateHitBox(0, mario.getUpVelocity() + g * deltaTime);
+                //mario.updateHitBox(0, mario.getUpVelocity() + g * deltaTime);
             }
 
+            mario.updateHitBox(0, mario.getPosition().y - oldPos.y);
+            oldPos = mario.getPosition();
             oldTime = newTime;
         }
 
         /* Collision-handling */
 
 
-        if (mario != null && goomba != null && door != null && !(collidesWith(floor) && Math.abs(mario.getUpVelocity()) < 0.1)) {
+        if (mario != null && goomba != null && door != null) {
             if (collidesWith(goomba) && !hitPlayed && !youWin) {
                 hitPlayed = true;
                 SM.PlaySoundEffect("Hit");
@@ -218,7 +215,7 @@ public class LabFiveGame extends Game{
                 youWin = true;
             }
 
-            if (collidesWith(floor)) {
+            if (collidesWith(floor) && (this.gameClock.getElapsedTime() - lastJumpTime) > 200) {
                 if(Math.abs(mario.getUpVelocity()) < 1) {
                     mario.setUpVelocity(0);
                 }
