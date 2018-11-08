@@ -30,11 +30,11 @@ public class LabFourGame extends Game{
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabFourGame() {
-        super("Game", 1500, 1300);
+        super("Game", 1300, 700);
         this.initGameClock();
-        door.setPosition(new Point(1000,1000));
+        door.setPosition(new Point(700,300));
         goomba.setPosition(new Point(210,250));
-        door.updateHitBox(1000,1000);
+        door.updateHitBox(700,300);
         goomba.updateHitBox(210,250);
         SM.LoadSoundEffect("Hit","Hit.wav");
         SM.LoadMusic("Music","Music.wav");
@@ -174,7 +174,7 @@ public class LabFourGame extends Game{
 
 
         if (mario != null && goomba != null && door != null) {
-            if (collidesWith(goomba) && !hitPlayed) {
+            if (collidesWith(goomba) && !hitPlayed && !youWin) {
                 hitPlayed = true;
                 SM.PlaySoundEffect("Hit");
                 score -= 100;
