@@ -19,6 +19,7 @@ public class LabFiveGame extends Game{
     Sprite mario = new Sprite("Mario", "Mario.png");
     Sprite door = new Sprite("Door","Door.png");
     Sprite goomba = new Sprite("Goomba","Goomba.png");
+    Sprite floor = new Sprite("Floor","Floor.png");
     private GameClock gameClock;
     private double visibilityTimer = 0;
     SoundManager SM = new SoundManager();
@@ -32,10 +33,17 @@ public class LabFiveGame extends Game{
     public LabFiveGame() {
         super("Game", 1300, 700);
         this.initGameClock();
+
+        /* Sprite configuration */
         door.setPosition(new Point(700,300));
         goomba.setPosition(new Point(210,250));
         door.updateHitBox(700,300);
         goomba.updateHitBox(210,250);
+        floor.setPosition(new Point(0,600));
+        floor.updateHitBox(0,600);
+        mario.setPhysics(true);
+
+        /* Sound effects/music */
         SM.LoadSoundEffect("Hit","Hit.wav");
         SM.LoadMusic("Music","Music.wav");
         SM.PlayMusic("Music");
@@ -209,6 +217,9 @@ public class LabFiveGame extends Game{
             /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
             if (mario != null && mario.getVisible())
                 mario.draw(g);
+
+            if (floor != null && floor.getVisible())
+                floor.draw(g);
 
             if (goomba != null && goomba.getVisible())
                 goomba.draw(g);
