@@ -26,6 +26,10 @@ public class LabFiveGame extends Game{
     boolean hitPlayed = false;
     int score = 1000;
     boolean youWin = false;
+    double oldTime = 0;
+    double newTime = 0;
+    double deltaTime = 0;
+    double g = 0.1;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
@@ -42,6 +46,7 @@ public class LabFiveGame extends Game{
         floor.setPosition(new Point(0,600));
         floor.updateHitBox(0,600);
         mario.setPhysics(true);
+        mario.setUpVelocity(0.0);
 
         /* Sound effects/music */
         SM.LoadSoundEffect("Hit","Hit.wav");
@@ -178,6 +183,21 @@ public class LabFiveGame extends Game{
             mario.updateHitBoxScale();
         }
 
+        /* Physics */
+
+        if(gameClock != null) {
+            newTime = this.gameClock.getElapsedTime();
+            deltaTime = newTime - oldTime;
+
+            if (mario.hasPhysics && oldTime != 0) {
+                mario.setUpVelocity(mario.getUpVelocity() + g * deltaTime);
+                mario.setPosition(new Point(mario.getPosition().x,
+                        (int) (mario.getPosition().y + mario.getUpVelocity())));
+            }
+
+            oldTime = newTime;
+        }
+
         /* Collision-handling */
 
 
@@ -197,6 +217,10 @@ public class LabFiveGame extends Game{
                 youWin = true;
             }
 
+            if (collidesWith(floor)) {
+                mario.setUpVelocity(mario.getUpVelocity() * -0.75);
+                System.out.println(mario.getUpVelocity());
+            }
 
         }
 

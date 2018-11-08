@@ -48,7 +48,7 @@ public class DisplayObject {
 
 	public boolean hasPhysics;
 
-	private int upVelocity;
+	private double upVelocity;
 
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
@@ -201,11 +201,11 @@ public class DisplayObject {
 		this.hasPhysics = phys;
 	}
 
-	public void setUpVelocity(int vel) {
+	public void setUpVelocity(double vel) {
 		this.upVelocity = vel;
 	}
 
-	public int getUpVelocity() {
+	public double getUpVelocity() {
 		return this.upVelocity;
 	}
 
