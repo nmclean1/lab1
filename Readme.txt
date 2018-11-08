@@ -1,1 +1,1 @@
-Animations are triggered by pressing any of the arrow keys. Animations can be slowed down by pressing - and sped up by pressing +. Make sure to run LabTwoGame, located at java/src/edu.virginia/lab2test/LabTwoGame.
+Use the controls as specified in the assignment to move Mario. Avoid the Goomba and get to the door to win! Make sure to run LabFourGame, located at java/src/edu.virginia/lab4test/LabFourGame.
