@@ -4,13 +4,9 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import edu.virginia.engine.display.DisplayObject;
+import edu.virginia.engine.display.*;
 import edu.virginia.engine.util.GameClock;
 
-import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.display.AnimatedSprite;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import org.w3c.dom.css.Rect;
 
 /**
@@ -25,6 +21,8 @@ public class LabFourGame extends Game{
     Sprite goomba = new Sprite("Goomba","Goomba.png");
     private GameClock gameClock;
     private double visibilityTimer = 0;
+    SoundManager SM = new SoundManager();
+    boolean hitPlayed = false;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
@@ -36,6 +34,9 @@ public class LabFourGame extends Game{
         goomba.setPosition(new Point(210,250));
         door.updateHitBox(1000,1000);
         goomba.updateHitBox(210,250);
+        SM.LoadSoundEffect("Hit","Hit.wav");
+        SM.LoadMusic("Music","Music.wav");
+        SM.PlayMusic("Music");
     }
 
     public void setGameClock() {
@@ -169,15 +170,22 @@ public class LabFourGame extends Game{
 
         /* Collision-handling */
 
-        /*
+
         if (mario != null && goomba != null && door != null) {
-            if (collidesWith(goomba))
-                System.out.println("DANGER");
+            if (collidesWith(goomba) && !hitPlayed) {
+                hitPlayed = true;
+                SM.PlaySoundEffect("Hit");
+            }
 
-            if (collidesWith(door))
-                System.out.println("WIN");
+            if(!collidesWith(goomba)){
+                hitPlayed = false;
+            }
 
-        }*/
+
+            //if (collidesWith(door))
+
+
+        }
 
     }
 
