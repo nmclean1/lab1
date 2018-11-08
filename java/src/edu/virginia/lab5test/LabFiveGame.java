@@ -86,7 +86,7 @@ public class LabFiveGame extends Game{
         */
 
         // Width is overlapping - height is overlapping
-        return hb.intersects(pohb.x,pohb.y,other.getUnscaledWidth(),other.getUnscaledHeight());
+        return hb.intersects(pohb.x,pohb.y,(int)(other.getUnscaledWidth()*other.getScaleX()),(int)(other.getUnscaledHeight()*other.getScaleY()));
 
         //System.out.println(phb.toString() + " Mario--goomba " + pohb.toString());
     }
@@ -235,7 +235,7 @@ public class LabFiveGame extends Game{
 
         if(floor != null && collidesWith(floor) && (mario.getPosition().y + getMarioHeight()) - floor.getPosition().y > 3){
             mario.setPosition(new Point(mario.getPosition().x, (int) (floor.getPosition().y - getMarioHeight())));
-            System.out.println("hit");
+            //System.out.println("hit");
         }
 
         if (youWin)
