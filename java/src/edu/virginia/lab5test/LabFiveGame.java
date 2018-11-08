@@ -193,6 +193,7 @@ public class LabFiveGame extends Game{
                 mario.setUpVelocity(mario.getUpVelocity() + g * deltaTime);
                 mario.setPosition(new Point(mario.getPosition().x,
                         (int) (mario.getPosition().y + mario.getUpVelocity())));
+                mario.updateHitBox(0, mario.getUpVelocity() + g * deltaTime);
             }
 
             oldTime = newTime;
@@ -201,7 +202,7 @@ public class LabFiveGame extends Game{
         /* Collision-handling */
 
 
-        if (mario != null && goomba != null && door != null) {
+        if (mario != null && goomba != null && door != null && !(collidesWith(floor) && Math.abs(mario.getUpVelocity()) < 0.1)) {
             if (collidesWith(goomba) && !hitPlayed && !youWin) {
                 hitPlayed = true;
                 SM.PlaySoundEffect("Hit");
@@ -218,8 +219,12 @@ public class LabFiveGame extends Game{
             }
 
             if (collidesWith(floor)) {
-                mario.setUpVelocity(mario.getUpVelocity() * -0.75);
-                System.out.println(mario.getUpVelocity());
+                if(Math.abs(mario.getUpVelocity()) < 1) {
+                    mario.setUpVelocity(0);
+                }
+                else {
+                    mario.setUpVelocity(mario.getUpVelocity() * -0.75);
+                }
             }
 
         }

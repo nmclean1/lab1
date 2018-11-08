@@ -150,7 +150,7 @@ public class DisplayObject {
 		this.hitbox = newShape;
 	}
 
-	public void updateHitBox(int x, int y) {
+	public void updateHitBox(double x, double y) {
 		Point pos = this.getPosition();
 		AffineTransform tx = new AffineTransform();
 		tx.setToTranslation(x,y);
@@ -267,7 +267,7 @@ public class DisplayObject {
 			 * objects
 			 */
 			reverseTransformations(g2d);
-			//g2d.draw(this.getHitbox());
+			g2d.draw(this.getHitbox());
 		}
 	}
 
