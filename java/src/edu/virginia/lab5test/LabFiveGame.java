@@ -41,15 +41,19 @@ public class LabFiveGame extends Game{
         this.initGameClock();
 
         /* Sprite configuration */
-        door.setPosition(new Point(700,300));
-        goomba.setPosition(new Point(210,250));
-        door.updateHitBox(700,300);
-        goomba.updateHitBox(210,250);
+        door.setPosition(new Point(700,384));
+        goomba.setPosition(new Point(350,547));
+        door.updateHitBox(700,384);
+        goomba.updateHitBox(350,547);
+        goomba.setScaleX(0.33);
+        goomba.setScaleY(0.33);
+        goomba.updateHitBoxScale();
         floor.setPosition(new Point(0,600));
         floor.updateHitBox(0,600);
+        floor.setScaleX(1.5);
+        floor.updateHitBoxScale();
         mario.setPhysics(true);
         mario.setUpVelocity(0.0);
-
         /* Sound effects/music */
         SM.LoadSoundEffect("Hit","Hit.wav");
         SM.LoadMusic("Music","Music.wav");
@@ -87,6 +91,11 @@ public class LabFiveGame extends Game{
         //System.out.println(phb.toString() + " Mario--goomba " + pohb.toString());
     }
 
+    public double getMarioHeight(){
+        return mario.getUnscaledHeight() * mario.getScaleY() * Math.cos(Math.toRadians(mario.getRotation()))
+                + mario.getUnscaledWidth() * mario.getScaleX() * Math.sin(Math.toRadians(mario.getRotation()));
+    }
+
     /**
      * Engine will automatically call this update method once per frame and pass to us
      * the set of keys (as strings) that are currently being pressed down
@@ -104,15 +113,15 @@ public class LabFiveGame extends Game{
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)){
-            mario.setPosition(new Point(mario.getPosition().x - 5,
+            mario.setPosition(new Point(mario.getPosition().x - 7,
                     mario.getPosition().y));
-            mario.updateHitBox(-5,0);
+            mario.updateHitBox(-7,0);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
-            mario.setPosition(new Point(mario.getPosition().x + 5,
+            mario.setPosition(new Point(mario.getPosition().x + 7,
                     mario.getPosition().y));
-            mario.updateHitBox(5,0);
+            mario.updateHitBox(7,0);
         }
 
         if (pressedKeys.contains(KeyEvent.VK_I)){
@@ -216,14 +225,17 @@ public class LabFiveGame extends Game{
             }
 
             if (collidesWith(floor) && (this.gameClock.getElapsedTime() - lastJumpTime) > 200) {
+                mario.setUpVelocity(mario.getUpVelocity() * -0.75);
                 if(Math.abs(mario.getUpVelocity()) < 1) {
                     mario.setUpVelocity(0);
                 }
-                else {
-                    mario.setUpVelocity(mario.getUpVelocity() * -0.75);
-                }
             }
 
+        }
+
+        if(floor != null && collidesWith(floor) && (mario.getPosition().y + getMarioHeight()) - floor.getPosition().y > 3){
+            mario.setPosition(new Point(mario.getPosition().x, (int) (floor.getPosition().y - getMarioHeight())));
+            System.out.println("hit");
         }
 
         if (youWin)
