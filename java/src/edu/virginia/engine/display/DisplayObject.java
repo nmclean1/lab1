@@ -46,6 +46,8 @@ public class DisplayObject {
 
 	private DisplayObject parent;
 
+	public boolean hasPhysics;
+
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
@@ -64,6 +66,7 @@ public class DisplayObject {
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
 		this.initHitBox();
+		this.hasPhysics = false;
 	}
 
 	public DisplayObject(String id, String fileName) {
@@ -78,6 +81,7 @@ public class DisplayObject {
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
 		this.initHitBox();
+		this.hasPhysics = false;
 	}
 
 	public void setVisible(Boolean visible) { this.visible = visible; }
@@ -189,6 +193,10 @@ public class DisplayObject {
 		if (displayImage == null) {
 			System.err.println("[DisplayObject.setImage] ERROR: " + imageName + " does not exist!");
 		}
+	}
+
+	public void setPhysics(boolean phys) {
+		this.hasPhysics = phys;
 	}
 
 
