@@ -1,38 +1,34 @@
 package edu.virginia.finalGame;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.*;
-import edu.virginia.engine.util.GameClock;
 import edu.virginia.engine.util.mouseFinder;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 public class level1 extends Game {
 
     /* Initialize the instance variables for the level */
     Sprite bg = new Sprite("bg","background.png");
-    Sprite tw = new Sprite("Truth","true_wire.png");
+    wireSprite wire1 = new wireSprite("wire1","unk_wire.png");
 
     mouseFinder mf;
 
     public level1(){
-        super("Game", 1300, 700);
+        super("Logical Boom", 1300, 700);
 
         /* Add the sprites */
-        tw.setPosition(new Point(100,100));
-        tw.updateHitBox(100,100);
-        tw.setScale(4);
-        tw.updateHitBoxScale();
+        wire1.setPosition(new Point(100,100));
+        wire1.updateHitBox(100,100);
+        wire1.setScale(4);
+        wire1.updateHitBoxScale();
         bg.setScale(2);
 
-        System.out.println(tw.getHitbox().getBounds());
+        System.out.println(wire1.getHitbox().getBounds());
 
         // Which wires can we click?
-        ArrayList<Sprite> clickables = new ArrayList<>();
-        clickables.add(tw);
+        ArrayList<wireSprite> clickables = new ArrayList<>();
+        clickables.add(wire1);
 
         // Pass those to the mouseListener to check if they're clicked
         mf = new mouseFinder(clickables);
@@ -49,6 +45,10 @@ public class level1 extends Game {
     public void update(ArrayList<Integer> pressedKeys){
         super.update(pressedKeys);
 
+        /* If a wire changes, make sure it's image linked is correct */
+        if (wire1 != null)
+            wire1.fixWireImg();
+
     }
 
     /**
@@ -59,11 +59,12 @@ public class level1 extends Game {
     public void draw(Graphics g){
         super.draw(g);
 
+        /* Always draw the bg first so other stuff is drawn on top */
         if (bg != null && bg.getVisible())
             bg.draw(g);
 
-        if (tw != null && tw.getVisible())
-            tw.draw(g);
+        if (wire1 != null && wire1.getVisible())
+            wire1.draw(g);
 
         // Graphics2D g2d = (Graphics2D)g;
     }

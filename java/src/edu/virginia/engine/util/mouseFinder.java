@@ -1,6 +1,6 @@
 package edu.virginia.engine.util;
 
-import edu.virginia.engine.display.Sprite;
+import edu.virginia.engine.display.*;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class mouseFinder implements MouseListener {
     // All clickable wires in the level
-    ArrayList<Sprite> clickables;
+    ArrayList<wireSprite> clickables;
 
     // Constructor
-    public mouseFinder(ArrayList<Sprite> clickables) {
+    public mouseFinder(ArrayList<wireSprite> clickables) {
         this.clickables = clickables;
     }
 
@@ -23,9 +23,11 @@ public class mouseFinder implements MouseListener {
         int y = e.getY();
 
         // Iterate through the ArrayList, checking if the click is within any hitbox
-        for (Sprite wire : clickables) {
-            if (wire.getHitbox().contains(x,y))
+        for (wireSprite wire : clickables) {
+            if (wire.getHitbox().contains(x,y)) {
                 System.out.println("within bounds");
+                wire.advValue();
+            }
         }
     }
 
