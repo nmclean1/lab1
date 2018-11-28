@@ -11,6 +11,9 @@ public class level1 extends Game {
     /* Initialize the instance variables for the level */
     Sprite bg = new Sprite("bg","background.png");
     wireSprite wire1 = new wireSprite("wire1","unk_wire.png");
+    gateSprite gate1 = new gateSprite("gate1","not_gate.png","not"); // We need to add a picture for all gates
+    wireSprite wire2 = new wireSprite("wire2","unk_wire.png");
+    gateSprite end = new gateSprite("end","end.png","end"); // We need to add a picture for the endpoint
 
     mouseFinder mf;
 
@@ -18,13 +21,22 @@ public class level1 extends Game {
         super("Logical Boom", 1300, 700);
 
         /* Add the sprites */
-        wire1.setPosition(new Point(100,100));
-        wire1.updateHitBox(100,100);
+        bg.setScale(2);
+        wire1.setPosition(new Point(100,350));
+        wire1.updateHitBox(100,350);
         wire1.setScale(4);
         wire1.updateHitBoxScale();
-        bg.setScale(2);
 
-        System.out.println(wire1.getHitbox().getBounds());
+        // Wires are approx 260 in width
+        gate1.setPosition(new Point(360,235));
+        gate1.setScale(4);
+        gate1.addPrevWire(wire1);
+
+        wire2.setPosition(new Point(620,350));
+        wire2.setScale(4);
+
+        end.setPosition(new Point(880,235));
+        end.setScale(4);
 
         // Which wires can we click?
         ArrayList<wireSprite> clickables = new ArrayList<>();
@@ -65,6 +77,15 @@ public class level1 extends Game {
 
         if (wire1 != null && wire1.getVisible())
             wire1.draw(g);
+
+        if (gate1 != null && gate1.getVisible())
+            gate1.draw(g);
+
+        if (wire2 != null && wire2.getVisible())
+            wire2.draw(g);
+
+        if (end != null && end.getVisible())
+            end.draw(g);
 
         // Graphics2D g2d = (Graphics2D)g;
     }

@@ -15,6 +15,7 @@ public class gateSprite extends Sprite {
         super(id,imgFileName);
         this.gateType = gateType;
         this.value = "?"; // Automatically set it to an unknown value
+        this.prevWires = new ArrayList<>();
     }
 
     public ArrayList<wireSprite> getPrevWires() {
