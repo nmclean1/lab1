@@ -24,4 +24,10 @@ public class Sprite extends DisplayObjectContainer {
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 	}
+
+	// To be overriden
+	public void reset() {
+
+	}
 }
+

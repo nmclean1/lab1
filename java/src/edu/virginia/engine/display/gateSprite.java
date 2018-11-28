@@ -99,4 +99,9 @@ public class gateSprite extends Sprite {
             return value;
         }
     }
+
+    @Override
+    public void reset() {
+        value = "?";
+    }
 }

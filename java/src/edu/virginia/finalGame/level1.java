@@ -19,12 +19,18 @@ public class level1 extends Game {
     String endVal = "None";
     String result = "";
 
+    ArrayList<Sprite> sprites = new ArrayList();
     mouseFinder mf;
 
     public level1(){
         super("Logical Boom", 1300, 700);
 
         /* Add the sprites */
+        sprites.add(wire1);
+        sprites.add(wire2);
+        sprites.add(gate1);
+        sprites.add(end);
+
         bg.setScale(2);
         wire1.setPosition(new Point(100,350));
         wire1.updateHitBox(100,350);
@@ -72,6 +78,12 @@ public class level1 extends Game {
                 result = "Nice job!";
             else if (endVal.equals("F"))
                 result = "Not quite, try again!";
+        }
+
+        if (pressedKeys.contains(KeyEvent.VK_R)) {
+            for (Sprite sp : sprites) {
+                sp.reset();
+            }
         }
 
         /* If a wire changes, make sure it's image linked is correct */
