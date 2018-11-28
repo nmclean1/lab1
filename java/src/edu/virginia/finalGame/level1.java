@@ -1,6 +1,7 @@
 package edu.virginia.finalGame;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.*;
@@ -13,7 +14,10 @@ public class level1 extends Game {
     wireSprite wire1 = new wireSprite("wire1","unk_wire.png");
     gateSprite gate1 = new gateSprite("gate1","not_gate.png","not"); // We need to add a picture for all gates
     wireSprite wire2 = new wireSprite("wire2","unk_wire.png");
-    gateSprite end = new gateSprite("end","end.png","end"); // We need to add a picture for the endpoint
+    gateSprite end = new gateSprite("end","end.png","end");
+
+    String endVal = "None";
+    String result = "";
 
     mouseFinder mf;
 
@@ -34,9 +38,11 @@ public class level1 extends Game {
 
         wire2.setPosition(new Point(620,350));
         wire2.setScale(4);
+        wire2.setPrevGate(gate1);
 
         end.setPosition(new Point(880,235));
         end.setScale(4);
+        end.addPrevWire(wire2);
 
         // Which wires can we click?
         ArrayList<wireSprite> clickables = new ArrayList<>();
@@ -57,9 +63,23 @@ public class level1 extends Game {
     public void update(ArrayList<Integer> pressedKeys){
         super.update(pressedKeys);
 
+        // We can change the key but on pressing G, figure out if the end is True!
+        if (pressedKeys.contains(KeyEvent.VK_G)){
+            endVal = end.calculateValue();
+            if (endVal.equals("-"))
+                result = "You forgot set a wire!";
+            else if (endVal.equals("T"))
+                result = "Nice job!";
+            else if (endVal.equals("F"))
+                result = "Not quite, try again!";
+        }
+
         /* If a wire changes, make sure it's image linked is correct */
         if (wire1 != null)
             wire1.fixWireImg();
+
+        if (wire2 != null)
+            wire2.fixWireImg();
 
     }
 
@@ -86,6 +106,11 @@ public class level1 extends Game {
 
         if (end != null && end.getVisible())
             end.draw(g);
+
+        if (endVal != null && !endVal.equals("None")) {
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+            g.drawString(result, 500, 50);
+        }
 
         // Graphics2D g2d = (Graphics2D)g;
     }

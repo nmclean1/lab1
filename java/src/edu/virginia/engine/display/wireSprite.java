@@ -37,4 +37,18 @@ public class wireSprite extends Sprite {
         else
             this.setImage("unk_wire.png");
     }
+
+    public String calculateValue() {
+        if (prevGate == null) {
+            // This is one of the clickable wires
+            if (value.equals("?"))
+                return "-";
+            else
+                return value;
+        }
+        else {
+            value = prevGate.calculateValue();
+            return value;
+        }
+    }
 }
