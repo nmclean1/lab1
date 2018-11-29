@@ -7,10 +7,12 @@ public class wireSprite extends Sprite {
     private gateSprite prevGate;
     // This can't be boolean, since some wires/gates will need to be unknown
     String value;
+    String bend;
 
-    public wireSprite(String id, String imgFileName) {
+    public wireSprite(String id, String imgFileName, String bend) {
         super(id,imgFileName);
         this.value = "?";
+        this.bend = bend;
     }
 
     public gateSprite getPrevGate() {
@@ -30,12 +32,15 @@ public class wireSprite extends Sprite {
     }
 
     public void fixWireImg() {
-        if (value.equals("T"))
-            this.setImage("true_wire.png");
-        else if (value.equals("F"))
-            this.setImage("false_wire.png");
-        else
-            this.setImage("unk_wire.png");
+        if (value.equals("T")) {
+            this.setImage("true_wire_" + bend + ".png");
+        }
+        else if (value.equals("F")) {
+            this.setImage("false_wire_" + bend + ".png");
+        }
+        else {
+            this.setImage("unk_wire_" + bend + ".png");
+        }
     }
 
     public String calculateValue() {

@@ -11,9 +11,9 @@ public class level1 extends Game {
 
     /* Initialize the instance variables for the level */
     Sprite bg = new Sprite("bg","background.png");
-    wireSprite wire1 = new wireSprite("wire1","unk_wire.png");
+    wireSprite wire1 = new wireSprite("wire1","unk_wire_.png","");
     gateSprite gate1 = new gateSprite("gate1","not_gate.png","not"); // We need to add a picture for all gates
-    wireSprite wire2 = new wireSprite("wire2","unk_wire.png");
+    wireSprite wire2 = new wireSprite("wire2","unk_wire_.png","");
     gateSprite end = new gateSprite("end","end.png","end");
 
     String endVal = "None";
