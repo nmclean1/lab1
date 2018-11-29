@@ -83,6 +83,7 @@ public class level1 extends Game {
         if (pressedKeys.contains(KeyEvent.VK_R)) {
             for (Sprite sp : sprites) {
                 sp.reset();
+                endVal = "None";
             }
         }
 

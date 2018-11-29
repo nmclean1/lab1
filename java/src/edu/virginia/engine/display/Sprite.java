@@ -25,7 +25,7 @@ public class Sprite extends DisplayObjectContainer {
 		super.update(pressedKeys);
 	}
 
-	// To be overriden
+	// To be overriden by gate and wire sprites
 	public void reset() {
 
 	}
