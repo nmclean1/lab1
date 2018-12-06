@@ -267,7 +267,7 @@ public class DisplayObject {
 			 * objects
 			 */
 			reverseTransformations(g2d);
-			g2d.draw(this.getHitbox());
+			//g2d.draw(this.getHitbox());
 		}
 	}
 
