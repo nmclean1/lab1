@@ -9,10 +9,12 @@ import java.util.ArrayList;
 public class mouseFinder implements MouseListener {
     // All clickable wires in the level
     ArrayList<wireSprite> clickables;
+    SoundManager SM = new SoundManager();
 
     // Constructor
     public mouseFinder(ArrayList<wireSprite> clickables) {
         this.clickables = clickables;
+        SM.LoadSoundEffect("Click", "Click.wav");
     }
 
     // Run every time the mouse is clicked
@@ -24,6 +26,7 @@ public class mouseFinder implements MouseListener {
         for (wireSprite wire : clickables) {
             // If it is, advance that wire
             if (wire.getHitbox().contains(x,y)) {
+                SM.PlaySoundEffect("Click");
                 wire.advValue();
             }
         }
