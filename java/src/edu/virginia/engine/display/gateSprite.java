@@ -83,10 +83,10 @@ public class gateSprite extends Sprite {
                     else if (val.equals("-"))
                         return "-";
                 }
-                if (count > 0)
-                    return "F";
-                else
+                if (count == 1)
                     return "T";
+                else
+                    return "F";
             }
             else if (gateType.equals("end")) {
                 // Again, we can assume that only one wire leads to the end
