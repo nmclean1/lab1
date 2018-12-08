@@ -19,9 +19,9 @@ public class level2 extends Game {
     wireSprite wire1 = new wireSprite("wire1","unk_wire_.png","");
     wireSprite wire2 = new wireSprite("wire2","unk_wire_.png","");
     wireSprite wire3 = new wireSprite("wire3","unk_wire_.png","");
-    wireSprite wire4 = new wireSprite("wire4","unk_wire_.png","down");
-    wireSprite wire5 = new wireSprite("wire5","unk_wire_.png","up");
-    wireSprite wire6 = new wireSprite("wire6","unk_wire_.png","up");
+    wireSprite wire4 = new wireSprite("wire4","unk_wire_down.png","down");
+    wireSprite wire5 = new wireSprite("wire5","unk_wire_up.png","up");
+    wireSprite wire6 = new wireSprite("wire6","unk_wire_up.png","up");
     wireSprite wire7 = new wireSprite("wire7","unk_wire_.png","");
     gateSprite gate1 = new gateSprite("gate1","not_gate.png","not");
     gateSprite gate2 = new gateSprite("gate2","or_gate.png","or");

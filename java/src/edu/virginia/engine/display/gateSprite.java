@@ -1,5 +1,6 @@
 package edu.virginia.engine.display;
 
+import javax.swing.plaf.TabbedPaneUI;
 import java.util.ArrayList;
 
 public class gateSprite extends Sprite {
@@ -42,23 +43,29 @@ public class gateSprite extends Sprite {
             *  We use '-' as the error sign to pass back, if end returns an error, we fail
             */
             if (gateType.equals("and")) {
+                boolean Fpresent = false;
                 for (wireSprite w : prevWires) {
                     String val = w.calculateValue();
                     if (val.equals("-"))
                         return "-";
                     else if (val.equals("F"))
-                        return "F";
+                        Fpresent = true;
                 }
+                if (Fpresent)
+                    return "F";
                 return "T";
             }
             else if (gateType.equals("or")) {
+                boolean Tpresent = false;
                 for (wireSprite w : prevWires) {
                     String val = w.calculateValue();
                     if (val.equals("-"))
                         return "-";
                     else if (val.equals("T"))
-                        return "T";
+                        Tpresent = true;
                 }
+                if (Tpresent)
+                    return "T";
                 return "F";
             }
             else if (gateType.equals("not")){
